@@ -1,0 +1,126 @@
+/******************************************************************
+ ROUND CORNERS
+******************************************************************/
+
+// Round all corners by amount
+@mixin round-corners($amount:5px) {
+  border-radius: $amount;
+  -moz-border-radius: $amount;
+  -webkit-border-radius: $amount;
+}
+
+// Round top corners by amount
+@mixin round-corners-top($amount:10px) {
+-webkit-border-top-left-radius: $amount;
+-webkit-border-top-right-radius: $amount;
+-moz-border-radius-topleft: $amount;
+-moz-border-radius-topright: $amount;
+border-top-left-radius: $amount;
+border-top-right-radius: $amount;
+}
+
+// Round bottom corners by amount
+@mixin round-corners-bottom($amount:10px) {
+-webkit-border-bottom-right-radius: 10px;
+-webkit-border-bottom-left-radius: 10px;
+-moz-border-radius-bottomright: 10px;
+-moz-border-radius-bottomleft: 10px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+
+@mixin round-corners-left($amount:10px) {
+-webkit-border-top-left-radius: 10px;
+-webkit-border-bottom-left-radius: 10px;
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-bottomleft: 10px;
+border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+
+@mixin round-corners-right($amount:10px) {
+-webkit-border-top-right-radius: 10px;
+-webkit-border-bottom-right-radius: 10px;
+-moz-border-radius-topright: 10px;
+-moz-border-radius-bottomright: 10px;
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+}
+
+/******************************************************************
+ BOX SHADOW
+******************************************************************/
+
+@mixin box-shadow($left:0px, $top:2px, $blur:2px, $color:#000, $inset:"") {
+  -webkit-box-shadow:$left $top $blur $color #{$inset};
+  -moz-box-shadow:$left $top $blur $color #{$inset};
+  box-shadow:$left $top $blur $color #{$inset};
+}
+
+/******************************************************************
+ SELECT DISABLE
+******************************************************************/
+
+@mixin select($color:none)  {
+  -webkit-user-select: $color;
+  -moz-user-select: $color;
+  -ms-user-select: $color;
+  user-select: $color;
+}
+
+/******************************************************************
+ TRANSITION
+******************************************************************/
+
+@mixin transition($transition-property:all, $transition-time:0.2s, $method:ease-in-out) {
+    -webkit-transition: $transition-property  $transition-time  $method;
+    -moz-transition: $transition-property  $transition-time  $method;
+    -ms-transition: $transition-property  $transition-time  $method;
+    -o-transition: $transition-property  $transition-time  $method;
+    transition: $transition-property  $transition-time  $method;
+}
+// @include transition(all, 0.2s, ease-in-out);
+
+/******************************************************************
+ RESPONSIVENESS
+******************************************************************/
+
+// Breakpoints for each query
+$smartphone:        480px;
+$tabletPortrait:    767px;
+$tabletLandscape:   1023px;
+$desktop:           1230px;
+$largeScreen:       1400px;
+
+@mixin respondTo($media) {
+  @if $media == phone {
+    @media (max-width: $smartphone) { @content; }
+  }
+  @else if $media == tablet {
+    @media (min-width: $tabletPortrait) and (max-width: $tabletLandscape) { @content; }
+  }
+  @else if $media == smallScreen {
+    @media (max-width: $desktop) { @content; }
+  }
+  @else if $media == mobile {
+    @media (max-width: $tabletLandscape) { @content; }
+  }
+  @else if $media == smallTablet {
+    @media (min-width: $smartphone) and (max-width: $tabletPortrait) { @content; }
+  }
+  @else if $media == ipadPortrait {
+    @media (max-width: $tabletPortrait) { @content; }
+  }
+  @else if $media == desktop {
+    @media (min-width: $desktop) { @content; }
+  }
+  @else if $media == largeScreen {
+    @media (min-width: $largeScreen) { @content; }
+  }
+}
+
+@mixin responsive($value1, $value2) {
+  @media (min-width: $value1) and (max-width: $value2) {
+    @content;
+  }
+}
