@@ -6,6 +6,7 @@
 * JavaScript folders and starter files for Plugins and Actions
 * Basic Grunt setup with: **compass**, **imagemin**, **jshint**, **uglify**, **watch**, **rsync**
 * CSS source maps
+
 ---
 ### How to install:
 
