@@ -1,0 +1,52 @@
+$susy: (
+        columns: 12, // The number of columns in grid
+        gutters: 30px/70px, // The size of a gutter in relation to a single column
+        math: fluid,
+        output: float,
+        container: 1170px,
+        //gutter-position: inside,
+        //column-width: 70px,
+        columns-width: false,
+//        debug: (
+//            image: show,
+//            color: blue,
+//            output: overlay,
+//            toggle: bottom right,
+//        ),
+);
+
+$tabletdesktop: (
+        columns: 12, // The number of columns in grid
+        gutters: 30px/50px, // The size of a gutter in relation to a single column
+        math: fluid,
+        output: float,
+        container: 960px,
+        column-width: false,
+);
+
+$tabletdesktopfluid: (
+        columns: 12, // The number of columns in grid
+        gutters: 30px/50px, // The size of a gutter in relation to a single column
+        math: fluid,
+        output: float,
+        container: auto,
+        container-position: gutter(),
+        column-width: false,
+);
+
+
+
+$tabletportrait: (
+        columns: 12, // The number of columns in grid
+        gutters: 15px/40px, // The size of a gutter in relation to a single column
+        math: fluid,
+        output: float,
+        container: 750px,
+        container-position: gutter(),
+        column-width: false,
+);
+
+
+//@include susy-breakpoint(1230px, $tabletdesktop) {
+//
+//}

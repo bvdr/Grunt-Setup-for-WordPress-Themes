@@ -21,30 +21,30 @@ border-top-right-radius: $amount;
 
 // Round bottom corners by amount
 @mixin round-corners-bottom($amount:10px) {
--webkit-border-bottom-right-radius: 10px;
--webkit-border-bottom-left-radius: 10px;
--moz-border-radius-bottomright: 10px;
--moz-border-radius-bottomleft: 10px;
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
+-webkit-border-bottom-right-radius: $amount;
+-webkit-border-bottom-left-radius: $amount;
+-moz-border-radius-bottomright: $amount;
+-moz-border-radius-bottomleft: $amount;
+border-bottom-right-radius: $amount;
+border-bottom-left-radius: $amount;
 }
 
 @mixin round-corners-left($amount:10px) {
--webkit-border-top-left-radius: 10px;
--webkit-border-bottom-left-radius: 10px;
--moz-border-radius-topleft: 10px;
--moz-border-radius-bottomleft: 10px;
-border-top-left-radius: 10px;
-border-bottom-left-radius: 10px;
+-webkit-border-top-left-radius: $amount;
+-webkit-border-bottom-left-radius: $amount;
+-moz-border-radius-topleft: $amount;
+-moz-border-radius-bottomleft: $amount;
+border-top-left-radius: $amount;
+border-bottom-left-radius: $amount;
 }
 
 @mixin round-corners-right($amount:10px) {
--webkit-border-top-right-radius: 10px;
--webkit-border-bottom-right-radius: 10px;
--moz-border-radius-topright: 10px;
--moz-border-radius-bottomright: 10px;
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
+-webkit-border-top-right-radius: $amount;
+-webkit-border-bottom-right-radius: $amount;
+-moz-border-radius-topright: $amount;
+-moz-border-radius-bottomright: $amount;
+border-top-right-radius: $amount;
+border-bottom-right-radius: $amount;
 }
 
 /******************************************************************
@@ -86,41 +86,134 @@ border-bottom-right-radius: 10px;
 ******************************************************************/
 
 // Breakpoints for each query
-$smartphone:        480px;
+$smartphone:        520px;
 $tabletPortrait:    767px;
-$tabletLandscape:   1023px;
+$fluidboxsize:      1020px;
+$middlesize:        980px;
+$tabletLandscape:   1024px;  //980
 $desktop:           1230px;
 $largeScreen:       1400px;
 
-@mixin respondTo($media) {
+@mixin respondTo($media, $orientation: null) {
   @if $media == phone {
     @media (max-width: $smartphone) { @content; }
   }
-  @else if $media == tablet {
+  @if $media == phone and $orientation == landscape {
+    @media (max-width: $smartphone) and (orientation: landscape) { @content; }
+  }
+
+  @else if $media == iPad {
     @media (min-width: $tabletPortrait) and (max-width: $tabletLandscape) { @content; }
   }
   @else if $media == smallScreen {
     @media (max-width: $desktop) { @content; }
   }
+  @else if $media == smallScreenfluid {
+    @media (max-width: $fluidboxsize) { @content; }
+  }
   @else if $media == mobile {
     @media (max-width: $tabletLandscape) { @content; }
   }
-  @else if $media == smallTablet {
+  @else if $media == tabletPortrait {
     @media (min-width: $smartphone) and (max-width: $tabletPortrait) { @content; }
   }
-  @else if $media == ipadPortrait {
+  @else if $media == tabletmiddle {
+    @media (min-width: $tabletPortrait) and (max-width: $middlesize) { @content; }
+  }
+
+  @else if $media == ipadPortrait{
     @media (max-width: $tabletPortrait) { @content; }
   }
+  @else if $media == ipadPortrait and $orientation == landscape {
+    @media (max-width: $tabletPortrait) and (orientation: landscape) { @content; }
+  }
+
   @else if $media == desktop {
     @media (min-width: $desktop) { @content; }
   }
   @else if $media == largeScreen {
     @media (min-width: $largeScreen) { @content; }
   }
+  @else if $media == tabletdesktop { // x
+    @media (min-width: $tabletLandscape+1) and (max-width: $desktop){ @content; }
+  }
+  @else if $media == bigerthanipad { // x
+    @media (min-width: $tabletLandscape+1) { @content; }
+  }
+  @else if $media == bigerthanphone { // x
+    @media (min-width: $tabletPortrait) { @content; }
+  }
 }
 
 @mixin responsive($value1, $value2) {
   @media (min-width: $value1) and (max-width: $value2) {
     @content;
+  }
+}
+
+$base-font-size: 15px;
+@function em($target, $context: $base-font-size) {
+  @if $target == 0 {
+    @return 0
+  }
+  @return $target / $context + 0em;
+}
+
+/******************************************************************
+ HELPER CLASSES
+******************************************************************/
+
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.clearfloat:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.visible {
+  @include opacity(1);
+}
+
+/******************************************************************
+ STAGGERING
+******************************************************************/
+
+@mixin animationDelay($delay) {
+  -webkit-animation-delay: $delay;
+  -moz-animation-delay: $delay;
+  -ms-animation-delay: $delay;
+  -o-animation-delay: $delay;
+  animation-delay: $delay;
+}
+
+$interval: .1s;
+$classesToAdd: 10;
+
+@for $i from 1 to $classesToAdd + 1 {
+  ._#{$i} {
+    @include animationDelay($i * $interval);
+  }
+}
+
+/******************************************************************
+ MARGIN CLASSES
+******************************************************************/
+
+$multiplier: 10;
+$marginClasses: 10;
+
+@for $i from 0 to $marginClasses + 1 {
+  .mt#{$i * $multiplier} {
+    margin-top:#{($i * $multiplier)}px;
+  }
+  .mb#{$i * $multiplier} {
+    margin-bottom:#{($i * $multiplier)}px;
   }
 }

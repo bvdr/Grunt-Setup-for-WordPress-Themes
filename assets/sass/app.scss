@@ -1,31 +1,15 @@
-/* 1 UTILITIES
-///////////////////////////////////////////////////
-*/
+/* 1 UTILITIES */
+@import 'colors/all';
 @import 'utilities/all';
 
+@import 'typography/typografy';
 
-/* 2 ATOMS
-///////////////////////////////////////////////////
-*/
-@import 'atoms/all';
-
-
-/* 3 MOLECULES
-///////////////////////////////////////////////////
-*/
-@import 'molecules/all';
-
-
-/* 4 ORGANISMS
-///////////////////////////////////////////////////
-*/
-@import 'organisms/all';
-
-
-/* 5 TEMPLATES
-///////////////////////////////////////////////////
-*/
-@import 'atoms/all';
+@import 'media/all';
+@import 'elements/all';
+@import 'modules/all';
+@import 'layout/all';
+@import 'site/all';
+@import 'forms/all';
 
 
 

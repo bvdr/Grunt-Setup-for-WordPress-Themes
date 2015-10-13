@@ -1,0 +1,350 @@
+body {
+  //@include container(80em);
+  //background: $dark;
+}
+
+.site-wrapper  {
+  @include transition(all, .25s, ease-in-out);
+
+  &.visible {
+    @include opacity(1);
+  }
+
+}
+
+//region ROW & CONTENT
+
+.row {
+  @include full();
+  @include respondTo(smallScreen) {
+    @include full($tabletdesktop);
+  }
+  @include respondTo(smallScreenfluid) {
+    @include full($tabletdesktopfluid);
+  }
+  @include respondTo(ipadPortrait) {
+    @include full($tabletportrait);
+  }
+}
+
+.container {
+  text-align: center;
+  @include container($susy);
+  @include respondTo(smallScreen) {
+    @include container($tabletdesktop);
+  }
+  @include respondTo(smallScreenfluid) {
+    @include container($tabletdesktopfluid);
+  }
+  @include respondTo(ipadPortrait) {
+    @include container($tabletportrait);
+  }
+}
+
+.content {
+  @include full();
+}
+
+.row.text {
+  background: #ffffff;
+  padding: 100px 0;
+
+  @include respondTo(phone) {
+    padding: 40px 0;
+  }
+}
+
+.row.grey {
+  background: $grey-light;
+  padding: 20px 0;
+}
+
+.row.red {
+  background: $accent;
+  padding: 100px 0;
+  color: #ffffff;
+  position: relative;
+  
+  @include respondTo(ipadPortrait) {
+    padding: 20px 0;
+  }
+}
+
+.row.dark {
+  background: $dark;
+}
+
+.content.text {
+  @include full();
+  @include span(8 wider);
+  @include squish(1);
+  @include prefix(1 narrow);
+  @include suffix(1 narrow);
+  @include respondTo(smallScreen) {
+    @include full($tabletdesktop);
+    @include span(8 wider $tabletdesktop);
+    @include squish(1 $tabletdesktop);
+    @include prefix(1 narrow $tabletdesktop);
+    @include suffix(1 narrow $tabletdesktop);
+  }
+  @include respondTo(mobile) {
+    &.head {
+      @include full($tabletdesktop);
+      @include span(12 $tabletdesktop);
+      padding: 0;
+//    @include prefix(1 narrow $tabletdesktop);
+//    @include suffix(1 narrow $tabletdesktop);
+    }
+  }
+  @include respondTo(mobile) {
+    &.story {
+      @include full($tabletdesktop);
+      @include span(12 $tabletdesktop);
+      padding: 0;
+      //    @include prefix(1 narrow $tabletdesktop);
+      //    @include suffix(1 narrow $tabletdesktop);
+    }
+  }
+  @include respondTo(ipadPortrait) {
+    @include full($tabletportrait);
+    @include span(8 wider $tabletportrait);
+    @include squish(1 $tabletportrait);
+    @include prefix(1 narrow $tabletportrait);
+    @include suffix(1 narrow $tabletportrait);
+  }
+  @include respondTo(phone) {
+    @include full($tabletportrait);
+    @include span(10 wider $tabletportrait);
+    @include squish(0 $tabletportrait);
+    @include prefix(1 narrow $tabletportrait);
+    @include suffix(1 narrow $tabletportrait);
+  }
+
+  margin-top: 0;
+  color: $font-color;
+  position: relative;
+  & > *:first-child {
+    @expand .mt0;
+  }
+}
+
+.content.article {
+  background: #ffffff;
+  @include round-corners(6px);
+  //overflow: hidden; //why? was this active in the first place? I deactivated this to be able to add history lines under the article sections
+  @include span(10 wider);
+  @include squish(1 narrow);
+
+  &.full {
+    @include span(12);
+    @include squish(0);
+    padding: 30px 0;
+    @include respondTo(phone) {
+      padding: 15px 0; //to tweak the support donation button on mobile
+    }
+  }
+
+
+  @include respondTo(phone) {
+    @include round-corners(0px);
+    @include full();
+  }
+
+  article{
+    padding: span(1 of 12 narrow) span(1 of 12 wider);
+    text-align: left;
+    color: $lighter-font-color;
+
+    @include respondTo(phone) {
+      padding: 20px;
+      padding-bottom:40px;
+      padding-top: 15px;
+    }
+  }
+
+  .row.grey{
+    @include round-corners-bottom(6px);
+  }
+}
+
+.content.cta {
+  @include span(8 wider);
+  @include squish(1);
+  @include prefix(1 narrow);
+  @include suffix(1 narrow);
+  @include respondTo(mobile) {
+    @include span(8 wider);
+    @include squish(1);
+    @include prefix(1 narrow);
+    @include suffix(1 narrow);
+  }
+  @include respondTo(phone) {
+    @include full($tabletportrait);
+    @include squish(0);
+    @include prefix(0);
+    @include suffix(0);
+  }
+}
+
+
+.row.background {
+  background: $background-color center top repeat-y fixed;
+  background-color: transparent;
+  background-size: cover;
+  overflow: hidden;
+
+  .page & {
+   background-position: center bottom;
+    @include respondTo(iPad) {
+      background-color: #ffffff;
+      background-position: center top;
+    }
+  }
+
+  @include respondTo(mobile) {
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-color: $background-color;
+  }
+
+  @include respondTo(phone) {
+    background-size: auto 400px;
+  }
+
+  //overflow: hidden;
+
+  &.projects {
+    @include respondTo(mobile) {
+      background-size: cover;
+    }
+    @include respondTo(phone) {
+      background-size: cover;
+    }
+  }
+
+  &.page {
+    @include respondTo(mobile) {
+      background-size: auto 768px;
+      background-position: center -90px;
+    }
+//    @include respondTo(tabletmiddle) {
+//      background-size: auto 678px;
+//    }
+    @include respondTo(ipadPortrait) {
+      background-repeat: no-repeat;
+      background-size: auto 576px;
+      background-position: center -89px;
+      background-color: #ffffff;
+    }
+    @include respondTo(phone) {
+      background-size: auto 400px;
+      background-position: center top;
+    }
+  }
+  
+  .fixed-image {
+    position: fixed;
+    width: 100%;
+    height: 110vh;
+    background-size: cover;
+    z-index: -1;
+    top:0;
+    left:0;
+
+    @include respondTo(mobile){
+      height: 577px;
+      position: absolute;
+      z-index: 0;
+    }
+  }
+  
+  img.background {
+    display: none;
+    position: fixed;
+    z-index: $background-image;
+    left: 50%;
+    margin-left: -50%;
+    top: 0;
+  }
+
+  .container {
+    margin-top:100px;
+    margin-bottom: 100px;
+    position: relative;
+
+    @include respondTo(phone) {
+      margin:{
+        top:40px;
+        bottom:40px
+      };
+    }
+  }
+
+  .container.projects {
+    margin-top:150px;
+    margin-bottom: 100px;
+
+    @include respondTo(mobile) {
+      margin-top:100px;
+      margin-bottom: 30px;
+    }
+
+    @include respondTo(phone) {
+      margin:{
+        top:40px;
+        bottom:0px;
+      }
+    }
+  }
+
+  .content.text {
+    color: #ffffff;
+  }
+}
+
+//endregion
+
+//article {
+//  @include span(3 of 12);
+//
+
+.center {
+  text-align: center;
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+  margin-bottom: 40px;
+  @include full();
+
+  @include respondTo(phone){
+    margin-bottom: 20px;
+  }
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.gradient {
+  //@include filter-gradient(#000000, rgba(0, 0, 0, 0.33), vertical); // IE6-9
+  //@include background-image(linear-gradient(top, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.24) 82%, rgba(0, 0, 0, 0.33) 100%));
+}
+
+.veil {
+  background-color: rgba(0, 0, 0, 0.8);
+}

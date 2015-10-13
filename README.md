@@ -2,7 +2,7 @@
 
 ### Included: 
 
-* SASS files atomic structure
+* SASS files OCSS structure
 * JavaScript folders and starter files for Plugins and Actions
 * Basic Grunt setup with: **compass**, **imagemin**, **jshint**, **uglify**, **watch**, **rsync**
 * CSS source maps
@@ -20,4 +20,3 @@
 ### Stuff used to make this:
 
  * [Grunt](http://gruntjs.com) as the main runner
- * [Atomic SASS with Gulp and Jekyll testing](https://github.com/ericwkw/SASS_project_structure_atomic) as inspiration for the atomic structure
